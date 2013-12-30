@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  　<style>
+    </style>
+    <title>ツイサーチ</title>
+  </head>
+  <body >
+    <div class="container">
+      <h1>ツイ検索 結果</h1>
+      <p>welcome to underground.</p>
+      <%= search_word %>
+      <form name="plain" method="post" action="/">
+        <div class="form-group">
+          <input type="text" class="form-control" name="query" /><br>
+          <input class="btn btn-primary" type="submit" value="検索">
+        </div>
+        <% for result in results %>
+        <%= result %>
+        <% end %>
+      </form>
+    </div>
+  </body>
+</html>
