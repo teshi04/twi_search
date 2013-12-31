@@ -32,7 +32,15 @@ post '/' do
   results = []
   search_word = params[:query]
   results = results | client.search(search_word, :result_type => "recent").collect do |tweet|
-    "#{tweet.user.screen_name}: #{tweet.text}\n"
+    text = tweet.text
+    # ツイートのテキストに検索単語があるのか(デフォルトだとScreenNameも検索されるため)
+    if text.include?(search_word) 
+      # メンションに検索単語があったら除外したい(◞‸◟)
+      #name = tweet.user_mentions.screen_name
+      #if name.include?(search_word)
+        "#{tweet.user.screen_name}: #{tweet.text}\n"
+      #end
+    end
   end
 
   erb :result, :locals => {:results => results, :search_word => search_word }
