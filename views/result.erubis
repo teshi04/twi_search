@@ -6,16 +6,16 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
   　<style>
     </style>
-    <title>ツイサーチ</title>
+    <title>高度なツイ検索</title>
   </head>
   <body >
     <div class="container">
-      <h1>ツイ検索 結果</h1>
+      <h1>高度なツイ検索 結果</h1>
       <p>welcome to underground.</p>
       <%= search_word %>
       <form name="plain" method="post" action="/">
         <div class="form-group">
-          <input type="text" class="form-control" name="query" /><br>
+          <input type="text" class="form-control" name="query" />
           <input class="btn btn-primary" type="submit" value="検索">
         </div>
         <% for result in results %>

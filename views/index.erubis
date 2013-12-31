@@ -14,7 +14,7 @@
       <p>welcome to underground.</p>
       <form name="plain" method="post" action="/">
         <div class="form-group">
-          <input type="text" class="form-control" name="query" /><br>
+          <input type="text" class="form-control" name="query" />
           <input class="btn btn-primary" type="submit" value="検索">
         </div>
       </form>
