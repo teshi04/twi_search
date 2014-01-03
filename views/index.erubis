@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
   　<style>
+    .form-control {
+      width: 230px;
+    }
     </style>
-    <title>ツイサーチ</title>
+    <title>高度なツイッター検索</title>
   </head>
   <body >
     <div class="container">
-      <h1>ツイ検索</h1>
-      <p>welcome to underground.</p>
+      <h1>高度なツイッター検索</h1>
+      <p>ツイートのテキストから検索します。<br>※ 検索には時間が掛かります。</p>
+      <br>
       <form name="plain" method="post" action="/">
-        <div class="form-group">
-          <input type="text" class="form-control" name="query" />
+        <div class="form-group form-inline">
+          <input type="text" class="form-control" name="query">
           <input class="btn btn-primary" type="submit" value="検索">
         </div>
       </form>

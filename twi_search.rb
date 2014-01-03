@@ -41,10 +41,11 @@ post '/' do
         screen_name = mention.screen_name
         if screen_name.include?(search_word)
           ng_flg = true
+          next
         end
       end
       if !ng_flg
-        "<p>#{tweet.user.screen_name}: #{tweet.text}</p>"
+        "#{tweet.user.screen_name}: #{tweet.text}"
       end
     end
   end
