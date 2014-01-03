@@ -32,14 +32,20 @@ post '/' do
   results = []
   search_word = params[:query]
   results = results | client.search(search_word, :result_type => "recent").collect do |tweet|
+    ng_flg = false
     text = tweet.text
     # ツイートのテキストに検索単語があるのか(デフォルトだとScreenNameも検索されるため)
     if text.include?(search_word) 
-      # メンションに検索単語があったら除外したい(◞‸◟)
-      #name = tweet.user_mentions.screen_name
-      #if name.include?(search_word)
-        "#{tweet.user.screen_name}: #{tweet.text}\n"
-      #end
+      mentions = tweet.user_mentions    
+      mentions.each do |mention|
+        screen_name = mention.screen_name
+        if screen_name.include?(search_word)
+          ng_flg = true
+        end
+      end
+      if !ng_flg
+        "<p>#{tweet.user.screen_name}: #{tweet.text}</p>"
+      end
     end
   end
 
