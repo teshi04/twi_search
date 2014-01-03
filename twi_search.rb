@@ -23,14 +23,13 @@ client = Twitter::REST::Client.new do |config|
 end
 
 get '/' do
-
-  search_word = "" 
-  erb :index, :locals => {:search_word => search_word }
+  erb :index
 end
 
 post '/' do
   results = []
   search_word = params[:query]
+
   results = results | client.search(search_word, :result_type => "recent").collect do |tweet|
     ng_flg = false
     text = tweet.text
@@ -44,6 +43,7 @@ post '/' do
           next
         end
       end
+      
       if !ng_flg
         "#{tweet.user.screen_name}: #{tweet.text}"
       end
