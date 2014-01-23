@@ -26,28 +26,16 @@ class TwiSearch < Sinatra::Base
   end
 
   post '/' do
-    results = []
     search_word = params[:query]
 
-    results = results | client.search(search_word, :result_type => "recent").collect do |tweet|
-      ng_flg = false
-      text = tweet.text
-      # ツイートのテキストに検索単語があるのか(デフォルトだとScreenNameも検索されるため)
-      if text.include?(search_word)
-        mentions = tweet.user_mentions
-        mentions.each do |mention|
-          screen_name = mention.screen_name
-          if screen_name.include?(search_word)
-            ng_flg = true
-            next
-          end
-        end
-
-        if !ng_flg
-          "#{tweet.user.screen_name}: #{tweet.text}"
-        end
+    results = client.search(search_word, :result_type => "recent").collect do |tweet|
+      if tweet.text.include?(search_word) && tweet.user_mentions.all? { |mention| !mention.screen_name.include?(search_word) }
+          tweet
       end
     end
+
+    # escape nil
+    results = results.compact
 
     erb :result, :locals => {:results => results, :search_word => search_word }
   end

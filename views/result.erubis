@@ -23,8 +23,8 @@
         </div>
       </form>
       <h4>検索ワード：<%= search_word %></h4>
-      <% for result in results %>
-        <p><%= result %></p>
+      <% for tweet in results %>
+        <p><%= tweet.text %></p>
       <% end %>
     </div>
   </body>
